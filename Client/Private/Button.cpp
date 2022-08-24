@@ -54,6 +54,11 @@ void CButton::Tick(_float fTimeDelta)
 	GetCursorPos(&ptMouse);
 	ScreenToClient(g_hWnd, &ptMouse);
 
+	if (PtInRect(&rcRect, ptMouse))
+	{
+		ERR_MSG(L"Ãæµ¹");
+	}
+
 }
 
 void CButton::Late_Tick(_float fTimeDelta)
@@ -101,12 +106,8 @@ HRESULT CButton::SetUp_Components()
 		return E_FAIL;
 
 	/* For.Com_Texture */
-	if (FAILED(__super::Add_Components(TEXT("Com_Texture"), LEVEL_LOGO, TEXT("Prototype_Component_Texture_UI"), (CComponent**)&m_pTextureCom)))
+	if (FAILED(__super::Add_Components(TEXT("Com_Texture"), LEVEL_LOGO, TEXT("Prototype_Component_Texture_Button"), (CComponent**)&m_pTextureCom)))
 		return E_FAIL;
-
-	/*if (FAILED(__super::Add_Components(TEXT("Com_Texture"), LEVEL_GAMEPLAY, TEXT("Prototype_Component_Texture_GamePlay_UI"), (CComponent**)&m_pTextureCom)))
-		return E_FAIL;*/
-
 
 	/* For.Com_VIBuffer */
 	if (FAILED(__super::Add_Components(TEXT("Com_VIBuffer"), LEVEL_STATIC, TEXT("Prototype_Component_VIBuffer_Rect"), (CComponent**)&m_pVIBufferCom)))
@@ -150,7 +151,7 @@ CButton * CButton::Create(LPDIRECT3DDEVICE9 pGraphic_Device)
 
 	if (FAILED(pInstance->Initialize_Prototype()))
 	{
-		ERR_MSG(TEXT("Failed to Created : CUI"));
+		ERR_MSG(TEXT("Failed to Created : CButton"));
 		Safe_Release(pInstance);
 	}
 
@@ -163,7 +164,7 @@ CGameObject * CButton::Clone(void* pArg)
 
 	if (FAILED(pInstance->Initialize(pArg)))
 	{
-		ERR_MSG(TEXT("Failed to Cloned : CUI"));
+		ERR_MSG(TEXT("Failed to Cloned : CButton"));
 		Safe_Release(pInstance);
 	}
 

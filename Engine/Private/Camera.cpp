@@ -21,7 +21,7 @@ HRESULT CCamera::Initialize(void * pArg)
 {
 	m_pTransform = CTransform::Create(m_pGraphic_Device);
 	if (nullptr == m_pTransform)
-		return E_FAIL;	
+		return E_FAIL;
 
 	memcpy(&m_CameraDesc, pArg, sizeof(CAMERADESC));
 
@@ -61,6 +61,8 @@ HRESULT CCamera::Bind_OnGraphicDev()
 
 	m_pGraphic_Device->SetTransform(D3DTS_VIEW, &ViewMatrix);
 	m_pGraphic_Device->SetTransform(D3DTS_PROJECTION, &ProjMatrix);
+
+
 
 	return S_OK;
 }

@@ -65,6 +65,9 @@ HRESULT CLoader::Loading_ForLogoLevel()
 	if (FAILED(pGameInstance->Add_Prototype(LEVEL_LOGO, TEXT("Prototype_Component_Texture_UI"),
 		CTexture::Create(m_pGraphic_Device, CTexture::TYPE_DEFAULT, TEXT("../Bin/Resources/Textures/Logo/Logo%d.png"), 1))))
 		return E_FAIL;
+	if (FAILED(pGameInstance->Add_Prototype(LEVEL_STATIC, TEXT("Prototype_Component_Texture_Player"),
+		CTexture::Create(m_pGraphic_Device, CTexture::TYPE_DEFAULT, TEXT("../Bin/Resources/Textures/Player/One/NornilAttack%d.png"), 2))))
+		return E_FAIL;
 	
 	/* ¸ðµ¨ ·Îµù Áß. */
 	lstrcpy(m_szLoadingText, TEXT("¸ðµ¨ ·Îµù Áß."));
@@ -115,7 +118,8 @@ HRESULT CLoader::Loading_ForGamePlayLevel()
 	if (FAILED(pGameInstance->Add_Prototype(LEVEL_GAMEPLAY, TEXT("Prototype_Component_Texture_Sky"),
 		CTexture::Create(m_pGraphic_Device, CTexture::TYPE_CUBEMAP, TEXT("../Bin/Resources/Textures/SkyBox/Sky_%d.dds"), 4))))
 		return E_FAIL;
-	
+
+
 
 	/* ¸ðµ¨ ·Îµù Áß. */
 	lstrcpy(m_szLoadingText, TEXT("¸ðµ¨ ·Îµù Áß."));
@@ -139,9 +143,9 @@ HRESULT CLoader::Loading_ForGamePlayLevel()
 	lstrcpy(m_szLoadingText, TEXT("°´Ã¼ »ý¼º Áß."));
 
 	/*For.Prototype_GameObject_UI */
-	if (FAILED(pGameInstance->Add_Prototype(TEXT("Prototype_GameObject_UI"),
-		CUI::Create(m_pGraphic_Device))))
-		return E_FAIL;
+	//if (FAILED(pGameInstance->Add_Prototype(TEXT("Prototype_GameObject_UI"),
+	//	CUI::Create(m_pGraphic_Device))))
+	//	return E_FAIL;
 
 	/*For.Prototype_GameObject_Sky */
 	if (FAILED(pGameInstance->Add_Prototype(TEXT("Prototype_GameObject_Sky"),
@@ -149,9 +153,9 @@ HRESULT CLoader::Loading_ForGamePlayLevel()
 		return E_FAIL;
 
 	/*For.Prototype_GameObject_Player*/
-	if (FAILED(pGameInstance->Add_Prototype(TEXT("Prototype_GameObject_Player"),
-		CPlayer::Create(m_pGraphic_Device))))
-		return E_FAIL;
+	//if (FAILED(pGameInstance->Add_Prototype(TEXT("Prototype_GameObject_Player"),
+	//	CPlayer::Create(m_pGraphic_Device))))
+	//	return E_FAIL;
 
 	/*For.Prototype_GameObject_Terrain*/
 	if (FAILED(pGameInstance->Add_Prototype(TEXT("Prototype_GameObject_Terrain"),

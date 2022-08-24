@@ -16,6 +16,7 @@ public:
 	HRESULT Add_GameObject(class CGameObject* pGameObject);
 	void Tick(_float fTimeDelta);
 	void Late_Tick(_float fTimeDelta);
+	class CGameObject* Get_FirstObject() { return m_GameObjects.front(); }
 
 private:
 	list<class CGameObject*>			m_GameObjects;
