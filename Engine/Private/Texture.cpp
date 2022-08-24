@@ -3,6 +3,7 @@
 CTexture::CTexture(LPDIRECT3DDEVICE9 pGraphic_Device)
 	: CComponent(pGraphic_Device)
 {
+	ZeroMemory(&m_FrameTexture, sizeof(FRAMETEXTURE));
 }
 
 CTexture::CTexture(const CTexture & rhs)
@@ -51,6 +52,26 @@ HRESULT CTexture::Bind_OnGraphicDev(_uint iIndex)
 		return E_FAIL;
 
 	return m_pGraphic_Device->SetTexture(0, m_Textures[iIndex]);	
+}
+//프레임 돌리는 함수
+HRESULT CTexture::Bind_FrameMove(_uint _uFirstFrame, _uint _EndFrame, _float _fFrameSpeed, _float fTimeDelta)
+{
+	
+	m_FrameTexture.EndFrame=_EndFrame;
+	m_FrameTexture.FrameSpeed=_fFrameSpeed;
+	m_FrameTexture.FrameTime=fTimeDelta;
+	/*for (m_FrameTexture.FirstFrame = _uFirstFrame; m_FrameTexture.FirstFrame <= m_FrameTexture.EndFrame; ++m_FrameTexture.FirstFrame)
+	{
+		if (m_FrameTexture.FirstFrame == m_FrameTexture.EndFrame)
+		{
+
+		}
+	}*/
+	if (m_FrameTexture.FrameTime >= m_FrameTexture.FrameSpeed)
+	{
+
+	}
+	return S_OK;
 }
 
 CTexture * CTexture::Create(LPDIRECT3DDEVICE9 pGraphic_Device, TYPE eType, const _tchar * pTextureFilePath, _uint iNumTexture)

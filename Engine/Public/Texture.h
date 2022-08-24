@@ -19,12 +19,18 @@ public:
 
 public:
 	HRESULT Bind_OnGraphicDev(_uint iIndex = 0);
+	HRESULT Bind_FrameMove(_uint _uFirstFrame,_uint _EndFrame,_float _fFrameSpeed, _float fTimeDelta);
 
 private:
 	_uint										m_iNumTextures = 0;
 	vector<IDirect3DBaseTexture9*>				m_Textures;
 	//LPDIRECT3DCUBETEXTURE9
 	//LPDIRECT3DTEXTURE9
+
+	// 프레임 구조체;
+private:
+	FRAMETEXTURE	m_FrameTexture;
+
 
 public:
 	static CTexture* Create(LPDIRECT3DDEVICE9 pGraphic_Device, TYPE eType, const _tchar* pTextureFilePath, _uint iNumTexture = 1);
