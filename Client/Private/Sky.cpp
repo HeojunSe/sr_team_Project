@@ -128,9 +128,9 @@ HRESULT CSky::Release_RenderState()
 {
 	m_pGraphic_Device->SetRenderState(D3DRS_CULLMODE, D3DCULL_CCW);
 
-	m_pGraphic_Device->SetRenderState(D3DRS_ZENABLE, TRUE);
+	/*m_pGraphic_Device->SetRenderState(D3DRS_ZENABLE, TRUE);
 	
-	m_pGraphic_Device->SetRenderState(D3DRS_ZWRITEENABLE, TRUE);
+	m_pGraphic_Device->SetRenderState(D3DRS_ZWRITEENABLE, TRUE);*/
 
 	return S_OK;
 }

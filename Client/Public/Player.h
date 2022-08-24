@@ -41,6 +41,12 @@ public:
 	static CPlayer* Create(LPDIRECT3DDEVICE9 pGraphic_Device);
 	virtual CGameObject* Clone(void* pArg = nullptr) override;
 	virtual void Free() override;
+
+private:
+
+	_uint m_uFrameNum = 0;
+	_float m_fFrameTime = 0.f;
+
 };
 
 END

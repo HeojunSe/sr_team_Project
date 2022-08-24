@@ -34,6 +34,42 @@ HRESULT CPlayer::Initialize(void* pArg)
 void CPlayer::Tick(_float fTimeDelta)
 {
 	__super::Tick(fTimeDelta);		
+	
+	m_fFrameTime += fTimeDelta;
+
+	if (m_fFrameTime >= 0.1f)
+	{
+		++m_uFrameNum;
+		m_fFrameTime = 0.f;
+		if (m_uFrameNum == 10)
+		{
+			m_uFrameNum = 0;
+		}
+	}
+
+
+	if (GetKeyState(VK_UP) < 0)
+	{
+		m_pTransformCom->Go_Straight(fTimeDelta);
+	}
+
+	if (GetKeyState(VK_DOWN) < 0)
+	{
+		m_pTransformCom->Go_Backward(fTimeDelta);
+	}
+
+	if (GetKeyState(VK_LEFT) < 0)
+	{
+		m_pTransformCom->Turn(_float3(0.f, 1.f, 0.f), fTimeDelta * -1.f);
+		 m_pTransformCom->Go_Left(fTimeDelta);
+	}
+
+	if (GetKeyState(VK_RIGHT) < 0)
+	{
+		m_pTransformCom->Turn(_float3(0.f, 1.f, 0.f), fTimeDelta);
+		 m_pTransformCom->Go_Right(fTimeDelta);
+	}
+
 
 }
 
@@ -65,7 +101,7 @@ HRESULT CPlayer::Render()
 	if (FAILED(m_pTransformCom->Bind_OnGraphicDev()))
 		return E_FAIL;
 
-	if (FAILED(m_pTextureCom->Bind_OnGraphicDev(0)))
+	if (FAILED(m_pTextureCom->Bind_OnGraphicDev(m_uFrameNum)))
 		return E_FAIL;
 
 	if (FAILED(SetUp_RenderState()))
@@ -86,7 +122,7 @@ HRESULT CPlayer::SetUp_Components()
 		return E_FAIL;
 
 	/* For.Com_Texture */
-	if (FAILED(__super::Add_Components(TEXT("Com_Texture"), LEVEL_GAMEPLAY, TEXT("Prototype_Component_Texture_UI"), (CComponent**)&m_pTextureCom)))
+	if (FAILED(__super::Add_Components(TEXT("Com_Texture"), LEVEL_STATIC, TEXT("Prototype_Component_Texture_Player"), (CComponent**)&m_pTextureCom)))
 		return E_FAIL;
 
 	/* For.Com_VIBuffer */
