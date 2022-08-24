@@ -94,6 +94,18 @@ void CObject_Manager::Clear(_uint iLevelIndex)
 	
 }
 
+CGameObject * CObject_Manager::Find_Target(_uint iLevelIndex, const _tchar * pLayerTag)
+{
+	if (iLevelIndex >= m_iNumLevels)
+		return nullptr;
+
+	auto	iter = find_if(m_pLayers[iLevelIndex].begin(), m_pLayers[iLevelIndex].end(), CTag_Finder(pLayerTag));
+	if (iter == m_pLayers[iLevelIndex].end())
+		return nullptr;
+
+	return iter->second->Get_FirstObject();
+}
+
 CGameObject * CObject_Manager::Find_Prototype(const _tchar * pPrototypeTag)
 {
 	auto	iter = find_if(m_Prototypes.begin(), m_Prototypes.end(), CTag_Finder(pPrototypeTag));

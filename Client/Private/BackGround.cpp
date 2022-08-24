@@ -35,29 +35,9 @@ void CBackGround::Tick(_float fTimeDelta)
 {
 	__super::Tick(fTimeDelta);
 
-	//// 카메라의 트랜스폼을 찾아(CCamera::m_pTransformTag);
+	// 카메라의 트랜스폼을 찾아(CCamera::m_pTransformTag);
 
-	//if (GetKeyState(VK_UP) < 0)
-	//{
-	//	m_pTransformCom->Go_Straight(fTimeDelta);
-	//}
-
-	//if (GetKeyState(VK_DOWN) < 0)
-	//{
-	//	m_pTransformCom->Go_Backward(fTimeDelta);
-	//}
-
-	//if (GetKeyState(VK_LEFT) < 0)
-	//{
-	//	m_pTransformCom->Turn(_float3(0.f, 1.f, 0.f), fTimeDelta * -1.f);
-	//	// m_pTransformCom->Go_Left(fTimeDelta);
-	//}
-
-	//if (GetKeyState(VK_RIGHT) < 0)
-	//{
-	//	m_pTransformCom->Turn(_float3(0.f, 1.f, 0.f), fTimeDelta);
-	//	// m_pTransformCom->Go_Right(fTimeDelta);
-	//}
+	
 
 }
 
