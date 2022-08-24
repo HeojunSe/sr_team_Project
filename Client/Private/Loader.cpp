@@ -62,8 +62,8 @@ HRESULT CLoader::Loading_ForLogoLevel()
 
 	/* 텍스쳐 로딩 중. */
 	lstrcpy(m_szLoadingText, TEXT("텍스쳐 로딩 중."));
-	if (FAILED(pGameInstance->Add_Prototype(LEVEL_LOGO, TEXT("Prototype_Component_Texture_BackGround"),
-		CTexture::Create(m_pGraphic_Device, CTexture::TYPE_DEFAULT, TEXT("../Bin/Resources/Textures/Default%d.jpg"), 2))))
+	if (FAILED(pGameInstance->Add_Prototype(LEVEL_LOGO, TEXT("Prototype_Component_Texture_UI"),
+		CTexture::Create(m_pGraphic_Device, CTexture::TYPE_DEFAULT, TEXT("../Bin/Resources/Textures/Logo/Logo%d.png"), 1))))
 		return E_FAIL;
 	
 	/* 모델 로딩 중. */
@@ -76,8 +76,8 @@ HRESULT CLoader::Loading_ForLogoLevel()
 
 	/* 객체 원형 생성 중. */
 	lstrcpy(m_szLoadingText, TEXT("객체 생성 중."));
-	if (FAILED(pGameInstance->Add_Prototype(TEXT("Prototype_GameObject_BackGround"),
-		CBackGround::Create(m_pGraphic_Device))))
+	if (FAILED(pGameInstance->Add_Prototype(TEXT("Prototype_GameObject_UI"),
+		CUI::Create(m_pGraphic_Device))))
 		return E_FAIL;
 	
 
@@ -101,8 +101,8 @@ HRESULT CLoader::Loading_ForGamePlayLevel()
 	/* 텍스쳐 로딩 중. */
 	lstrcpy(m_szLoadingText, TEXT("텍스쳐 로딩 중."));
 
-	/*For.Prototype_Component_Texture_UI */
-	if (FAILED(pGameInstance->Add_Prototype(LEVEL_GAMEPLAY, TEXT("Prototype_Component_Texture_UI"),
+	/*For.Prototype_Component_Texture_GamePlay_UI */
+	if (FAILED(pGameInstance->Add_Prototype(LEVEL_GAMEPLAY, TEXT("Prototype_Component_Texture_GamePlay_UI"),
 		CTexture::Create(m_pGraphic_Device, CTexture::TYPE_DEFAULT, TEXT("../Bin/Resources/Textures/Default%d.jpg"), 2))))
 		return E_FAIL;
 

@@ -32,35 +32,33 @@ void CLevel_Loading::Tick(_float fTimeDelta)
 
 	if (true == m_pLoader->Get_Finished())
 	{
-		if (GetKeyState(VK_RETURN) & 0x8000)
+		/* 넥스트레벨에 대한 준비가 끝나면 실제 넥스트레벨을 할당한다. */
+		CLevel*			pNewLevel = nullptr;
+
+		switch (m_eNextLevel)
 		{
-			/* 넥스트레벨에 대한 준비가 끝나면 실제 넥스트레벨을 할당한다. */
-			CLevel*			pNewLevel = nullptr;
+		case LEVEL_LOGO:
+			pNewLevel = CLevel_Logo::Create(m_pGraphic_Device);
+			break;
+		case LEVEL_GAMEPLAY:
+			pNewLevel = CLevel_GamePlay::Create(m_pGraphic_Device);
+			break;
+		}
 
-			switch (m_eNextLevel)
-			{
-			case LEVEL_LOGO:
-				pNewLevel = CLevel_Logo::Create(m_pGraphic_Device);
-				break;
-			case LEVEL_GAMEPLAY:
-				pNewLevel = CLevel_GamePlay::Create(m_pGraphic_Device);
-				break;
-			}
+		if (nullptr == pNewLevel)
+			return;
 
-			if (nullptr == pNewLevel)
-				return;
+		CGameInstance* pGameInstance = CGameInstance::Get_Instance();
+		if (nullptr == pGameInstance)
+			return;
+		Safe_AddRef(pGameInstance);
 
-			CGameInstance* pGameInstance = CGameInstance::Get_Instance();
-			if (nullptr == pGameInstance)
-				return;
-			Safe_AddRef(pGameInstance);
+		if (FAILED(pGameInstance->Open_Level(m_eNextLevel, pNewLevel)))
+			return;
 
-			if (FAILED(pGameInstance->Open_Level(m_eNextLevel, pNewLevel)))
-				return;
+		Safe_Release(pGameInstance);
+	}		
 
-			Safe_Release(pGameInstance);
-		}		
-	}
 }
 
 void CLevel_Loading::Late_Tick(_float fTimeDelta)

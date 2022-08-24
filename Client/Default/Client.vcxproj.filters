@@ -46,6 +46,9 @@
     <Filter Include="02.GameObject\Player">
       <UniqueIdentifier>{8a64d64b-c7a5-4ff0-bdc8-f8e746588a56}</UniqueIdentifier>
     </Filter>
+    <Filter Include="02.GameObject\Button">
+      <UniqueIdentifier>{c2d9b48f-669b-42ec-b09a-f84bdcbfc44f}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <Text Include="ReadMe.txt" />
@@ -99,6 +102,9 @@
     <ClInclude Include="..\Public\Player.h">
       <Filter>02.GameObject\Player</Filter>
     </ClInclude>
+    <ClInclude Include="..\Public\Button.h">
+      <Filter>02.GameObject\Button</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\Private\MainApp.cpp">
@@ -139,6 +145,9 @@
     </ClCompile>
     <ClCompile Include="..\Private\Player.cpp">
       <Filter>02.GameObject\Player</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Private\Button.cpp">
+      <Filter>02.GameObject\Button</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

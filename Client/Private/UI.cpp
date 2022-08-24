@@ -27,10 +27,10 @@ HRESULT CUI::Initialize(void* pArg)
 
 	D3DXMatrixOrthoLH(&m_ProjMatrix, g_iWinSizeX, g_iWinSizeY, 0.f, 1.f);
 
-	m_fSizeX = 200.0f;
-	m_fSizeY = 200.0f;
-	m_fX = 100.f;
-	m_fY = 100.f;
+	m_fSizeX = g_iWinSizeX;
+	m_fSizeY = g_iWinSizeY;
+	m_fX = 640.f;
+	m_fY = 360.f;
 
 	if (FAILED(SetUp_Components()))
 		return E_FAIL;
@@ -51,11 +51,6 @@ void CUI::Tick(_float fTimeDelta)
 	POINT		ptMouse;
 	GetCursorPos(&ptMouse);
 	ScreenToClient(g_hWnd, &ptMouse);
-
-	if (PtInRect(&rcRect, ptMouse))
-	{
-		ERR_MSG(L"Ãæµ¹");
-	}
 
 }
 
@@ -104,8 +99,12 @@ HRESULT CUI::SetUp_Components()
 		return E_FAIL;
 
 	/* For.Com_Texture */
-	if (FAILED(__super::Add_Components(TEXT("Com_Texture"), LEVEL_GAMEPLAY, TEXT("Prototype_Component_Texture_UI"), (CComponent**)&m_pTextureCom)))
+	if (FAILED(__super::Add_Components(TEXT("Com_Texture"), LEVEL_LOGO, TEXT("Prototype_Component_Texture_UI"), (CComponent**)&m_pTextureCom)))
 		return E_FAIL;
+
+	/*if (FAILED(__super::Add_Components(TEXT("Com_Texture"), LEVEL_GAMEPLAY, TEXT("Prototype_Component_Texture_GamePlay_UI"), (CComponent**)&m_pTextureCom)))
+		return E_FAIL;*/
+
 
 	/* For.Com_VIBuffer */
 	if (FAILED(__super::Add_Components(TEXT("Com_VIBuffer"), LEVEL_STATIC, TEXT("Prototype_Component_VIBuffer_Rect"), (CComponent**)&m_pVIBufferCom)))
