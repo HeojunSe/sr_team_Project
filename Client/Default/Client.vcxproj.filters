@@ -49,6 +49,9 @@
     <Filter Include="02.GameObject\Monster">
       <UniqueIdentifier>{024d2930-2c44-4785-b3ba-e7b71caa94ae}</UniqueIdentifier>
     </Filter>
+    <Filter Include="02.GameObject\Terrain\CubeTerrain">
+      <UniqueIdentifier>{c307b8fa-3eb4-46a8-abd0-9a3c273086cd}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <Text Include="ReadMe.txt" />
@@ -105,6 +108,9 @@
     <ClInclude Include="..\Public\Monster.h">
       <Filter>02.GameObject\Monster</Filter>
     </ClInclude>
+    <ClInclude Include="..\Public\CubeTerrain.h">
+      <Filter>02.GameObject\Terrain\CubeTerrain</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\Private\MainApp.cpp">
@@ -148,6 +154,9 @@
     </ClCompile>
     <ClCompile Include="..\Private\Monster.cpp">
       <Filter>02.GameObject\Monster</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Private\CubeTerrain.cpp">
+      <Filter>02.GameObject\Terrain\CubeTerrain</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

@@ -73,6 +73,9 @@
     <Filter Include="01.Utility\03.Components\VIBuffer\Cube">
       <UniqueIdentifier>{08c9dd47-7f7c-4318-a43f-ef8ea0ca2412}</UniqueIdentifier>
     </Filter>
+    <Filter Include="01.Utility\03.Components\VIBuffer\CubeTerrain">
+      <UniqueIdentifier>{eff6eee3-dbb4-4d69-9bc3-dc0d25faf30e}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\Private\Base.cpp">
@@ -137,6 +140,9 @@
     </ClCompile>
     <ClCompile Include="..\Private\VIBuffer_Cube.cpp">
       <Filter>01.Utility\03.Components\VIBuffer\Cube</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Private\VIBuffer_CubeTerrain.cpp">
+      <Filter>01.Utility\03.Components\VIBuffer\CubeTerrain</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -217,6 +223,9 @@
     </ClInclude>
     <ClInclude Include="..\Public\VIBuffer_Cube.h">
       <Filter>01.Utility\03.Components\VIBuffer\Cube</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Public\VIBuffer_CubeTerrain.h">
+      <Filter>01.Utility\03.Components\VIBuffer\CubeTerrain</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
