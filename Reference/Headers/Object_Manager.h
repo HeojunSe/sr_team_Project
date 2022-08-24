@@ -20,7 +20,7 @@ public:
 	void Tick(_float fTimeDelta);
 	void Late_Tick(_float fTimeDelta);
 	void Clear(_uint iLevelIndex);
-
+	class CGameObject* Find_Target(_uint iLevelIndex, const _tchar* pLayerTag);
 
 private:
 	map<const _tchar*, class CGameObject*>			m_Prototypes;

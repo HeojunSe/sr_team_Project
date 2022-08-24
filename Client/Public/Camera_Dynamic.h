@@ -34,6 +34,10 @@ public:
 	static CCamera_Dynamic* Create(LPDIRECT3DDEVICE9 pGraphic_Device);
 	virtual CGameObject* Clone(void* pArg = nullptr) override;
 	virtual void Free() override;
+
+private:
+	_float	m_fCameraZoomY = 10;
+	_float	m_fCameraZoomZ = 10;
 };
 
 END

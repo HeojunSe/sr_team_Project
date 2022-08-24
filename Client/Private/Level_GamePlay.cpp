@@ -3,7 +3,7 @@
 
 #include "GameInstance.h"
 #include "Camera_Dynamic.h"
-
+#include "Player.h"
 CLevel_GamePlay::CLevel_GamePlay(LPDIRECT3DDEVICE9 pGraphic_Device)
 	: CLevel(pGraphic_Device)
 {
@@ -84,9 +84,8 @@ HRESULT CLevel_GamePlay::Ready_Layer_Camera(const _tchar * pLayerTag)
 	ZeroMemory(&CameraDesc, sizeof(CCamera_Dynamic::CAMERADESC_DERIVED));
 
 	CameraDesc.iTest = 10;
-
-	CameraDesc.CameraDesc.vEye = _float3(0.f, 10.f, -10.f);
-	CameraDesc.CameraDesc.vAt = _float3(0.f, 0.f, 0.f);
+	
+	CameraDesc.CameraDesc.vEye = _float3(0.f, 10.f, -10.f);\
 
 	CameraDesc.CameraDesc.fFovy = D3DXToRadian(60.0f);
 	CameraDesc.CameraDesc.fAspect = (_float)g_iWinSizeX / g_iWinSizeY;

@@ -1,6 +1,7 @@
 #include "stdafx.h"
 #include "..\Public\Camera_Dynamic.h"
 #include "GameInstance.h"
+#include "Player.h"
 
 CCamera_Dynamic::CCamera_Dynamic(LPDIRECT3DDEVICE9 pGraphic_Device)
 	: CCamera(pGraphic_Device)
@@ -22,12 +23,9 @@ HRESULT CCamera_Dynamic::Initialize_Prototype()
 
 HRESULT CCamera_Dynamic::Initialize(void* pArg)
 {
-	
-
 	if (FAILED(__super::Initialize(&((CAMERADESC_DERIVED*)pArg)->CameraDesc)))
 		return E_FAIL;
 	
-
 	return S_OK;
 }
 
@@ -35,45 +33,38 @@ void CCamera_Dynamic::Tick(_float fTimeDelta)
 {
 	__super::Tick(fTimeDelta);
 
-	if (GetKeyState('W') < 0)
-	{
-		m_pTransform->Go_Straight(fTimeDelta);
-	}
-
-	if (GetKeyState('S') < 0)
-	{
-		m_pTransform->Go_Backward(fTimeDelta);
-	}
-
-	if (GetKeyState('A') < 0)
-	{
-		
-		m_pTransform->Go_Left(fTimeDelta);
-	}
-
-	if (GetKeyState('D') < 0)
-	{
-		
-		m_pTransform->Go_Right(fTimeDelta);
-	}
-
 	CGameInstance*			pGameInstance = CGameInstance::Get_Instance();
 	Safe_AddRef(pGameInstance);
 
-	_long			MouseMove = 0;
+	//ƒ´∏ﬁ∂Û ¿ßƒ° ∞Ì¡§
+	auto player= pGameInstance->Find_Target(LEVEL_GAMEPLAY, TEXT("Layer_Player"));
 
-	if (MouseMove = pGameInstance->Get_DIMMoveState(DIMM_X))
-	{
-		m_pTransform->Turn(_float3(0.f, 1.f, 0.f), fTimeDelta * MouseMove * 0.1f);
-	}
+	_float3 PlayerPos = dynamic_cast<CPlayer*>(player)->Get_TransformCom()->Get_State(CTransform::STATE_POSITION);
 
-	if (MouseMove = pGameInstance->Get_DIMMoveState(DIMM_Y))
-	{
-		m_pTransform->Turn(m_pTransform->Get_State(CTransform::STATE_RIGHT), fTimeDelta * MouseMove * 0.1f);
-	}
+	m_pTransform->Set_State(CTransform::STATE_POSITION, _float3(PlayerPos.x, PlayerPos.y + m_fCameraZoomY, PlayerPos.z - m_fCameraZoomZ));
+	m_pTransform->LookAt(PlayerPos);
 
 	
 
+	//∆‰¿Ã¡ˆ æ˜¥ŸøÓ¿∏∑Œ ƒ´∏ﬁ∂Û ¡‹¿Œ, ¡‹æ∆øÙ ±‚¥…
+	_long			MouseMove = 0;
+	bool			bDown = false;
+	if (MouseMove = pGameInstance->Get_DIMMoveState(DIMM_WHEEL))
+	{
+		if (MouseMove < 0)
+			bDown = true;
+
+		if (bDown&&m_fCameraZoomY < 12) //¡‹æ∆øÙ
+		{
+			m_fCameraZoomY += 0.42f;
+			m_fCameraZoomZ += 0.3f;
+		}
+		else if(!bDown&&m_fCameraZoomY>0.5) //¡‹¿Œ
+		{
+			m_fCameraZoomY -= 0.42f;
+			m_fCameraZoomZ -= 0.3f;
+		}
+	}
 
 	Safe_Release(pGameInstance);
 
