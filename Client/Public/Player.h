@@ -7,7 +7,7 @@ BEGIN(Engine)
 class CTexture;
 class CRenderer;
 class CTransform;
-class CVIBuffer_Rect;
+class CVIBuffer_Cube;
 END
 
 BEGIN(Client)
@@ -25,12 +25,14 @@ public:
 	virtual void Tick(_float fTimeDelta)override;
 	virtual void Late_Tick(_float fTimeDelta)override;
 	virtual HRESULT Render() override;
+public:
+	CTransform* Get_TransformCom() { return m_pTransformCom; }
 
 private: /* For.Components */
 	CTexture*				m_pTextureCom = nullptr;
 	CRenderer*				m_pRendererCom = nullptr;
 	CTransform*				m_pTransformCom = nullptr;
-	CVIBuffer_Rect*		m_pVIBufferCom = nullptr;
+	CVIBuffer_Cube*		m_pVIBufferCom = nullptr;
 
 private:
 	HRESULT SetUp_Components();
