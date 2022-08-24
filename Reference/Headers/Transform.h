@@ -55,6 +55,7 @@ public:
 	void Go_Left(_float fTimeDelta);
 	void Turn(_float3 vAxis, _float fTimeDelta);
 	void LookAt(_float3 vPoint);
+	void Jumping(_float fTimeDelta, _float fJumpPower);
 
 private:
 	_float4x4			m_WorldMatrix;

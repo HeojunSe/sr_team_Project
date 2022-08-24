@@ -54,6 +54,12 @@ void CPlayer::Tick(_float fTimeDelta)
 	{
 		m_pTransformCom->Go_Right(fTimeDelta);
 	}
+
+	if (GetKeyState(VK_SPACE) < 0x8000)
+	{
+		m_pTransformCom->Jumping(fTimeDelta,5);
+	}
+
 }
 
 void CPlayer::Late_Tick(_float fTimeDelta)
@@ -88,30 +94,7 @@ void CPlayer::Late_Tick(_float fTimeDelta)
 
 
 
-void CPlayer::Jumping(_float fTimeDelta)
-{
-	// 이게 타겟을 그림자 지정을한다 .
 
-	//
-	//if (GetAsyncKeyState(VK_SPACE)&&0x8000)
-	//{
-	//	m_tInfo.fY -= (m_fJumpPower*fTimeDelta) - (9.8f*fTimeDelta*fTimeDelta / 3);
-	//	m_fTime += 0.1f;
-	//	if (m_tRect.bottom - 21 >= fabs(m_pTarget->Get_Info().fY))
-	//	{
-	//		m_Jump = false;
-	//		m_fTime = 0;
-	//		m_tInfo.fY = dynamic_cast<CShadow*>(CObjMgr::Get_Instance()->Get_Shadow())->Get_Imsi() - 98.5;
-	//	}
-
-	//}
-
-
-
-
-
-
-}
 
 HRESULT CPlayer::Render()
 {

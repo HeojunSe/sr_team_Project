@@ -133,6 +133,21 @@ void CTransform::LookAt(_float3 vPoint)
 	Set_State(CTransform::STATE_LOOK, *D3DXVec3Normalize(&vLook, &vLook) * vScale.z);
 }
 
+void CTransform::Jumping(_float fTimeDelta, _float fJumpPower)
+{
+	// 이게 타겟을 그림자 지정을한다 .
+
+			//m_tInfo.fY -= (fJumpPower*fTimeDelta) - (9.8f*fTimeDelta*fTimeDelta / 3);
+		//m_fTime += 0.1f;
+		//if (m_tRect.bottom - 21 >= fabs(m_pTarget->Get_Info().fY))
+		//{
+		//	m_Jump = false;
+		//	m_fTime = 0;
+		//	//m_tInfo.fY = dynamic_cast<CShadow*>(CObjMgr::Get_Instance()->Get_Shadow())->Get_Imsi() - 98.5;
+		
+}
+
+
 CTransform * CTransform::Create(LPDIRECT3DDEVICE9 pGraphic_Device)
 {
 	CTransform*	pInstance = new CTransform(pGraphic_Device);
