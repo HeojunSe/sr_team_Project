@@ -30,7 +30,7 @@ private:
 	// 프레임 구조체;
 private:
 	FRAMETEXTURE	m_FrameTexture;
-
+	_bool			m_bFrame = true;
 
 public:
 	static CTexture* Create(LPDIRECT3DDEVICE9 pGraphic_Device, TYPE eType, const _tchar* pTextureFilePath, _uint iNumTexture = 1);

@@ -70,10 +70,47 @@ void CPlayer::Late_Tick(_float fTimeDelta)
 	////m_pTransformCom->Set_State(CTransform::STATE_UP, *(_float3*)&ViewMatrix.m[1][0]);
 	//m_pTransformCom->Set_State(CTransform::STATE_LOOK, *(_float3*)&ViewMatrix.m[2][0]);
 
-	
+	//m_pTextureCom->Bind_FrameMove(0, 20, 1, fTimeDelta);
+
+	m_fFrameTime += fTimeDelta;
+
+	if (m_fFrameTime > 0.1f)
+	{
+		m_uFrameNum++;
+		m_fFrameTime = 0.f;
+		if (m_uFrameNum > 21)
+			m_uFrameNum = 0;
+	}
 
 	if (nullptr != m_pRendererCom)
 		m_pRendererCom->Add_RenderGroup(CRenderer::RENDER_NONALPHABLEND, this);
+}
+
+
+
+void CPlayer::Jumping(_float fTimeDelta)
+{
+	// 이게 타겟을 그림자 지정을한다 .
+
+	//
+	//if (GetAsyncKeyState(VK_SPACE)&&0x8000)
+	//{
+	//	m_tInfo.fY -= (m_fJumpPower*fTimeDelta) - (9.8f*fTimeDelta*fTimeDelta / 3);
+	//	m_fTime += 0.1f;
+	//	if (m_tRect.bottom - 21 >= fabs(m_pTarget->Get_Info().fY))
+	//	{
+	//		m_Jump = false;
+	//		m_fTime = 0;
+	//		m_tInfo.fY = dynamic_cast<CShadow*>(CObjMgr::Get_Instance()->Get_Shadow())->Get_Imsi() - 98.5;
+	//	}
+
+	//}
+
+
+
+
+
+
 }
 
 HRESULT CPlayer::Render()
@@ -83,10 +120,12 @@ HRESULT CPlayer::Render()
 	
 	if (FAILED(m_pTransformCom->Bind_OnGraphicDev()))
 		return E_FAIL;
-
-	if (FAILED(m_pTextureCom->Bind_OnGraphicDev(1)))
-		return E_FAIL;
-
+	if (m_bIdle == true)
+	{
+		if (FAILED(m_pTextureCom->Bind_OnGraphicDev(m_uFrameNum)))
+			return E_FAIL;
+	}
+	
 	if (FAILED(SetUp_RenderState()))
 		return E_FAIL;
 
@@ -105,11 +144,11 @@ HRESULT CPlayer::SetUp_Components()
 		return E_FAIL;
 
 	/* For.Com_Texture */
-	if (FAILED(__super::Add_Components(TEXT("Com_Texture"), LEVEL_GAMEPLAY, TEXT("Prototype_Component_Texture_Sky"), (CComponent**)&m_pTextureCom)))
+	if (FAILED(__super::Add_Components(TEXT("Com_Texture"), LEVEL_GAMEPLAY, TEXT("Prototype_Component_Texture_Player"), (CComponent**)&m_pTextureCom)))
 		return E_FAIL;
 
 	/* For.Com_VIBuffer */
-	if (FAILED(__super::Add_Components(TEXT("Com_VIBuffer"), LEVEL_GAMEPLAY, TEXT("Prototype_Component_VIBuffer_Cube"), (CComponent**)&m_pVIBufferCom)))
+	if (FAILED(__super::Add_Components(TEXT("Com_VIBuffer"), LEVEL_STATIC, TEXT("Prototype_Component_VIBuffer_Rect"), (CComponent**)&m_pVIBufferCom)))
 		return E_FAIL;
 
 
@@ -131,7 +170,9 @@ HRESULT CPlayer::SetUp_RenderState()
 {
 	if (nullptr == m_pGraphic_Device)
 		return E_FAIL;	
-
+	m_pGraphic_Device->SetRenderState(D3DRS_ALPHATESTENABLE, TRUE);
+	m_pGraphic_Device->SetRenderState(D3DRS_ALPHAREF, 0);
+	m_pGraphic_Device->SetRenderState(D3DRS_ALPHAFUNC, D3DCMP_GREATER);
 	//m_pGraphic_Device->SetRenderState(D3DRS_FILLMODE, D3DFILL_WIREFRAME);
 
 	return S_OK;
@@ -140,9 +181,12 @@ HRESULT CPlayer::SetUp_RenderState()
 HRESULT CPlayer::Release_RenderState()
 {
 	//m_pGraphic_Device->SetRenderState(D3DRS_FILLMODE, D3DFILL_SOLID);
-
+	// m_pGraphic_Device->SetRenderState(D3DRS_ALPHABLENDENABLE, FALSE);
+	m_pGraphic_Device->SetRenderState(D3DRS_ALPHATESTENABLE, FALSE);
 	return S_OK;
 }
+
+
 
 CPlayer * CPlayer::Create(LPDIRECT3DDEVICE9 pGraphic_Device)
 {
@@ -179,3 +223,5 @@ void CPlayer::Free()
 	Safe_Release(m_pRendererCom);
 	Safe_Release(m_pTextureCom);
 }
+
+

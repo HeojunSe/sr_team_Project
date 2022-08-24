@@ -56,22 +56,31 @@ HRESULT CTexture::Bind_OnGraphicDev(_uint iIndex)
 //프레임 돌리는 함수
 HRESULT CTexture::Bind_FrameMove(_uint _uFirstFrame, _uint _EndFrame, _float _fFrameSpeed, _float fTimeDelta)
 {
-	
-	m_FrameTexture.EndFrame=_EndFrame;
-	m_FrameTexture.FrameSpeed=_fFrameSpeed;
-	m_FrameTexture.FrameTime=fTimeDelta;
-	/*for (m_FrameTexture.FirstFrame = _uFirstFrame; m_FrameTexture.FirstFrame <= m_FrameTexture.EndFrame; ++m_FrameTexture.FirstFrame)
-	{
-		if (m_FrameTexture.FirstFrame == m_FrameTexture.EndFrame)
-		{
 
-		}
-	}*/
-	if (m_FrameTexture.FrameTime >= m_FrameTexture.FrameSpeed)
+	if (m_bFrame == true)
 	{
+		m_FrameTexture.FirstFrame = _uFirstFrame;
+		m_FrameTexture.EndFrame = _EndFrame;
+		m_bFrame = false;
+	}
+	m_FrameTexture.FrameSpeed +=_fFrameSpeed;
+	m_FrameTexture.FrameTime += fTimeDelta;
+
+		if (m_FrameTexture.FrameTime >= m_FrameTexture.FrameSpeed)
+		{
+			m_FrameTexture.FirstFrame++;
+
+			m_FrameTexture.FrameTime = 0.f;
+			return E_FAIL;
+
+			if (m_FrameTexture.FirstFrame > m_FrameTexture.EndFrame)
+			{
+				m_FrameTexture.FirstFrame = _uFirstFrame;
+			}
 
 	}
-	return S_OK;
+	
+	return m_pGraphic_Device->SetTexture(0,m_Textures[m_FrameTexture.FirstFrame]);
 }
 
 CTexture * CTexture::Create(LPDIRECT3DDEVICE9 pGraphic_Device, TYPE eType, const _tchar * pTextureFilePath, _uint iNumTexture)
