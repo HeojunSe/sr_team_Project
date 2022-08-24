@@ -56,8 +56,8 @@ namespace Engine
 	{
 		unsigned int FirstFrame;
 		unsigned int EndFrame;
-		float FrameTime;
-		float FrameSpeed;
+		float		 FrameTime;
+		float	     FrameSpeed;
 
 	}FRAMETEXTURE;
 
